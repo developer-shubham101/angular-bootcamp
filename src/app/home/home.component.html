@@ -1,0 +1,13 @@
+<!-- <h4>Coffee</h4>
+<ul class="list-group">
+  @for (coffee of coffees; track coffee.id; let i = $index) {
+  <app-coffee-item [coffee]="coffee"></app-coffee-item>
+  }
+</ul> -->
+
+
+<div class="container">
+  <div *ngFor="let coffee of coffees" >
+    <app-coffee-item [coffee]="coffee"></app-coffee-item>
+  </div>
+</div>
