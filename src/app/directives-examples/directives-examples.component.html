@@ -1,0 +1,72 @@
+<div class="container">
+  <h2>Angular Directives Examples</h2>
+
+  <!-- ngIf Example -->
+  <div *ngIf="showElement">
+    <p>The ngIf directive example: This text is conditionally rendered.</p>
+  </div>
+
+  <!-- ngFor Example -->
+  <div>
+    <p>The ngFor directive example:</p>
+    <ul>
+      <li *ngFor="let item of items">{{ item }}</li>
+    </ul>
+  </div>
+
+  <!-- ngSwitch Example -->
+  <div [ngSwitch]="switchValue">
+    <div *ngSwitchCase="'A'">Switch Case A</div>
+    <div *ngSwitchCase="'B'">Switch Case B</div>
+    <div *ngSwitchDefault>Switch Default Case</div>
+  </div>
+
+  <!-- ngClass Example -->
+  <div [ngClass]="{ 'highlight': isHighlighted }">
+    <p>The ngClass directive example: This text is conditionally styled.</p>
+  </div>
+
+  <!-- ngStyle Example -->
+  <div [ngStyle]="{ 'color': textColor }">
+    <p>The ngStyle directive example: This text is conditionally styled with a color.</p>
+  </div>
+
+  <!-- ngModel Example -->
+  <div>
+    <label for="name">Enter Name:</label>
+    <input type="text" id="name" [(ngModel)]="name">
+    <p>Your name is: {{ name }}</p>
+  </div>
+
+  <!-- ngModelGroup Example -->
+  <form #form="ngForm">
+    <div ngModelGroup="address">
+      <label for="street">Street:</label>
+      <input type="text" id="street" name="street" [(ngModel)]="address.street">
+
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" [(ngModel)]="address.city">
+    </div>
+  </form>
+
+  <!-- ngNonBindable Example -->
+  <div ngNonBindable>
+    {{ This text is not compiled }}
+  </div>
+
+  <!-- ngTemplateOutlet Example -->
+  <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+  <ng-template #templateRef>
+    <p>The ngTemplateOutlet directive example: This content is rendered dynamically.</p>
+  </ng-template>
+
+  <!-- ngContainer Example -->
+  <ng-container *ngIf="showContainer">
+    <p>The ngContainer directive example: This is conditional content without extra DOM elements.</p>
+  </ng-container>
+
+
+  <p appHighlight> Hover over this text to see the highlight effect. </p>
+
+
+</div>
