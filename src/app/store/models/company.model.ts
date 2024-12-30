@@ -8,7 +8,7 @@ export interface Project {
   platform: string;
   technology: string[];
   about_project: string;
-  responsibilities: string[];
+  responsibilities: string;
 }
 
 export interface File {
@@ -27,10 +27,10 @@ export interface Company {
   _id: string;
   organization: string;
   position: string;
-  from_date: Date;
-  to_date: Date;
+  from_date: string;
+  to_date: string;
   role: string;
-  responsibilities: string[];
+  responsibilities: string;
   projects: Project[];
   files: File[];
 }

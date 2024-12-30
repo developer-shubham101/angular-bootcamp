@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'ngrx-examples', component: NGRxExampleComponent },
   { path: 'companies', component: CompanyListComponent },
   { path: 'companies/:id', component: CompanyDetailsComponent },
-  { path: 'project', component: CompanyDetailsComponent },
+  // { path: 'project', component: CompanyDetailsComponent },
   { path: 'project/:id', component: ProjectDetailsComponent },
 ];
 

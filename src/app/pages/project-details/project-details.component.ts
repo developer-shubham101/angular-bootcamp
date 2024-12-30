@@ -23,16 +23,16 @@ export class ProjectDetailsComponent implements OnInit {
   editMode = false;
 
   constructor(
-    private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private router: Router
+    private readonly store: Store<AppState>,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.project$ = this.store.select(selectProject);
     this.project$.subscribe((project) => {
-      this.project = {...project!};
+      this.project = { ...project! };
       this.formatDates();
     });
     this.store.dispatch(loadProject({ id }));

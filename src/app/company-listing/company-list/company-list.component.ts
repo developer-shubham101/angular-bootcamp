@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class CompanyListComponent implements OnInit {
   companies$!: Observable<Company[]>;
 
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(private readonly store: Store<AppState>, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.companies$ = this.store.select(selectAllCompanies);

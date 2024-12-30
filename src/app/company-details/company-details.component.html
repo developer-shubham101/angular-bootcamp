@@ -9,7 +9,7 @@
       <p><strong>Role:</strong> {{ company.role }}</p>
       <p><strong>Responsibilities:</strong></p>
       <ul>
-        <li *ngFor="let responsibility of company.responsibilities">{{ responsibility }}</li>
+        <li *ngFor="let responsibility of company.responsibilities.split('\n')">{{ responsibility }}</li>
       </ul>
  
       <div *ngFor="let project of company.projects">

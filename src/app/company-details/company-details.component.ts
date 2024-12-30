@@ -6,6 +6,7 @@ import { AppState } from '../store/app.state';
 import { selectSelectedCompany } from '../store/selectors/company.selectors';
 import { Company } from '../store/models/company.model';
 import { Observable } from 'rxjs';
+import moment from 'moment';
 
 @Component({
   selector: 'app-company-details',
@@ -16,8 +17,11 @@ export class CompanyDetailsComponent implements OnInit {
   company$!: Observable<Company | undefined | null>;
   company!: Company;
   editMode = false;
-  
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
+
+  constructor(
+    private readonly store: Store<AppState>,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -27,8 +31,23 @@ export class CompanyDetailsComponent implements OnInit {
       this.company$.subscribe((company: Company | undefined | null) => {
         if (company) {
           this.company = { ...company };
+          this.formatDates();
         }
       });
+    }
+  }
+
+  formatDates(): void {
+    if (!this.company) {
+      return;
+    }
+    if (this.company.from_date) {
+      this.company.from_date = moment(this.company.from_date).format(
+        'YYYY-MM-DD'
+      );
+    }
+    if (this.company.to_date) {
+      this.company.to_date = moment(this.company.to_date).format('YYYY-MM-DD');
     }
   }
 

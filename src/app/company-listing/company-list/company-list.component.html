@@ -10,15 +10,16 @@
           <p class="card-text"><strong>To:</strong> {{ company.to_date | date }}</p>
           <p class="card-text"><strong>Role:</strong> {{ company.role }}</p>
           <p class="card-text"><strong>Responsibilities:</strong></p>
-          <ul>
-            <li *ngFor="let responsibility of company.responsibilities">{{ responsibility }}</li>
-          </ul>
-          <p class="card-text"><strong>Projects:</strong></p>
+          <p class="card-text">{{ company.responsibilities | slice:0:150 }}...</p>
+          <!-- <ul>
+            <li *ngFor="let responsibility of company.responsibilities.split('\n')">{{ responsibility }}</li>
+          </ul> -->
+          <!-- <p class="card-text"><strong>Projects:</strong></p>
           <ul>
             <li *ngFor="let project of company.projects">
               Project ID: {{ project }}
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>

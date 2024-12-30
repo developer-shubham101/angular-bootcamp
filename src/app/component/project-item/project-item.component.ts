@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Project } from '../../store/models/company.model';
-
+ 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.state';
+import { Router } from '@angular/router';
 @Component({
-  selector: 'app-project-item', 
+  selector: 'app-project-item',
   templateUrl: './project-item.component.html',
   styleUrl: './project-item.component.css',
 })
@@ -17,6 +20,11 @@ export class ProjectItemComponent {
     platform: '',
     technology: [],
     about_project: '',
-    responsibilities: [],
+    responsibilities: '',
   };
+  constructor(private readonly router: Router) {}
+
+  viewProjectDetails(id: string): void {
+    this.router.navigate(['/project', id]); // Navigate to the company details page
+  }
 }
