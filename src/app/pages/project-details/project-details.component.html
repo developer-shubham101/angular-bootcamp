@@ -1,0 +1,76 @@
+<div class="container">
+
+  <!-- <app-project-item [project]="project"> </app-project-item> -->
+
+
+  <div *ngIf="project">
+    <h2>Project Details</h2>
+    <div *ngIf="!editMode">
+      <p><strong>Project Name:</strong> {{ project.project_name }}</p>
+      <p><strong>Organization:</strong> {{ project.organization }}</p>
+      <p><strong>Position:</strong> {{ project.position }}</p>
+      <p><strong>From Date:</strong> {{ project.from_date | date }}</p>
+      <p><strong>To Date:</strong> {{ project.to_date | date }}</p>
+      <p><strong>Platform:</strong> {{ project.platform }}</p>
+      <p><strong>Technologies:</strong></p>
+      <!-- <ul>
+        <li *ngFor="let tech of project.technology">{{ tech }}</li>
+      </ul> -->
+      <div class="d-inline-flex">
+        <div *ngFor="let tech of project.technology" class="badge rounded-pill bg-primary me-2">
+          {{ tech }}
+        </div>
+      </div>
+      <p><strong>Responsibilities:</strong></p>
+      <ul>
+        <li *ngFor="let responsibility of project.responsibilities">{{ responsibility }}</li>
+      </ul>
+
+      <button class="btn btn-primary" (click)="enableEditMode()">Edit</button>
+    </div>
+
+    <div *ngIf="editMode">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="project_name">Project Name</label>
+          <input type="text" class="form-control" id="project_name" [(ngModel)]="project.project_name"
+            name="project_name">
+        </div>
+        <div class="form-group">
+          <label for="organization">Organization</label>
+          <input type="text" class="form-control" id="organization" [(ngModel)]="project.organization"
+            name="organization">
+        </div>
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" id="position" [(ngModel)]="project.position" name="position">
+        </div>
+        <div class="form-group">
+          <label for="from_date">From Date</label>
+          <input type="date" class="form-control" id="from_date" [(ngModel)]="project.from_date" name="from_date">
+        </div>
+        <div class="form-group">
+          <label for="to_date">To Date</label>
+          <input type="date" class="form-control" id="to_date" [(ngModel)]="project.to_date" name="to_date">
+        </div>
+        <div class="form-group">
+          <label for="platform">Platform</label>
+          <input type="text" class="form-control" id="platform" [(ngModel)]="project.platform" name="platform">
+        </div>
+        <div class="form-group">
+          <label for="technology">Technology</label>
+          <input type="text" class="form-control" id="technology" [(ngModel)]="project.technology" name="technology">
+        </div>
+        <div class="form-group">
+          <label for="responsibilities">Responsibilities</label>
+          <textarea class="form-control" id="responsibilities" [(ngModel)]="project.responsibilities"
+            name="responsibilities"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="disableEditMode()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+
+</div>

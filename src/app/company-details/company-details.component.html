@@ -1,0 +1,56 @@
+<div class="container">
+  <div *ngIf="company">
+    <h2>Company Details</h2>
+    <div *ngIf="!editMode">
+      <p><strong>Organization:</strong> {{ company.organization }}</p>
+      <p><strong>Position:</strong> {{ company.position }}</p>
+      <p><strong>From Date:</strong> {{ company.from_date | date }}</p>
+      <p><strong>To Date:</strong> {{ company.to_date | date }}</p>
+      <p><strong>Role:</strong> {{ company.role }}</p>
+      <p><strong>Responsibilities:</strong></p>
+      <ul>
+        <li *ngFor="let responsibility of company.responsibilities">{{ responsibility }}</li>
+      </ul>
+ 
+      <div *ngFor="let project of company.projects">
+        <app-project-item [project]="project"> </app-project-item>
+      </div>
+      
+
+      <button class="btn btn-primary" (click)="enableEditMode()">Edit</button>
+    </div>
+
+    <div *ngIf="editMode">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="organization">Organization</label>
+          <input type="text" class="form-control" id="organization" [(ngModel)]="company.organization"
+            name="organization">
+        </div>
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" id="position" [(ngModel)]="company.position" name="position">
+        </div>
+        <div class="form-group">
+          <label for="from_date">From Date</label>
+          <input type="date" class="form-control" id="from_date" [(ngModel)]="company.from_date" name="from_date">
+        </div>
+        <div class="form-group">
+          <label for="to_date">To Date</label>
+          <input type="date" class="form-control" id="to_date" [(ngModel)]="company.to_date" name="to_date">
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" class="form-control" id="role" [(ngModel)]="company.role" name="role">
+        </div>
+        <div class="form-group">
+          <label for="responsibilities">Responsibilities</label>
+          <textarea class="form-control" id="responsibilities" [(ngModel)]="company.responsibilities"
+            name="responsibilities"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="disableEditMode()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

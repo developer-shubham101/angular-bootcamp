@@ -19,6 +19,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { itemReducer } from './store/reducers/item.reducer';
 import { ItemEffects } from './store/effects/item.effects';
 import { NGRxExampleComponent } from './ngrx-example/ngrx-example.component';
+import { CompanyListComponent } from './company-listing/company-list/company-list.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { CompanyEffects } from './store/effects/company.effects';
+import { companyReducer } from './store/reducers/company.reducer';
+import { ProjectItemComponent } from './component/project-item/project-item.component';
+import { ProjectDetailsComponent } from './pages/project-details/project-details.component';
+import { projectReducer } from './store/reducers/project.reducer';
+import { ProjectEffects } from './store/effects/project.effects';
  
 @NgModule({
   declarations: [
@@ -32,6 +40,10 @@ import { NGRxExampleComponent } from './ngrx-example/ngrx-example.component';
     DirectivesExamplesComponent,
     HighlightDirective,
     NGRxExampleComponent,
+    CompanyListComponent,
+    CompanyDetailsComponent,
+    ProjectItemComponent,
+    ProjectDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +51,12 @@ import { NGRxExampleComponent } from './ngrx-example/ngrx-example.component';
     FormsModule,
     HttpClientModule,
 
-    StoreModule.forRoot({ items: itemReducer }),
-    EffectsModule.forRoot([ItemEffects]),
+    StoreModule.forRoot({
+      items: itemReducer,
+      companies: companyReducer,
+      project: projectReducer,
+    }),
+    EffectsModule.forRoot([ItemEffects, CompanyEffects, ProjectEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
   ],
   providers: [],
