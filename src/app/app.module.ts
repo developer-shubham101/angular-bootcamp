@@ -27,6 +27,7 @@ import { ProjectItemComponent } from './component/project-item/project-item.comp
 import { ProjectDetailsComponent } from './pages/project-details/project-details.component';
 import { projectReducer } from './store/reducers/project.reducer';
 import { ProjectEffects } from './store/effects/project.effects';
+import { ProjectListingComponent } from './pages/project-listing/project-listing.component';
  
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProjectEffects } from './store/effects/project.effects';
     CompanyDetailsComponent,
     ProjectItemComponent,
     ProjectDetailsComponent,
+    ProjectListingComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { loadProjects, loadProjectsFailure, loadProjectsSuccess } from './../actions/project.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
  
@@ -19,6 +20,18 @@ export class ProjectEffects {
     private actions$: Actions,
     private projectService: ProjectService
   ) {}
+
+  loadProjects$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadProjects),
+      mergeMap(() =>
+        this.projectService.getProjects().pipe(
+          map((projects) => loadProjectsSuccess({ projects })),
+          catchError((error) => of(loadProjectsFailure({ error })))
+        )
+      )
+    )
+  );
 
   loadProject$ = createEffect(() =>
     this.actions$.pipe(

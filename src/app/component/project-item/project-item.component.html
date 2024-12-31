@@ -2,8 +2,8 @@
   <div class="card mb-12 shadow-sm">
     <div class="card-body">
  
-      <h5 class="card-title">
-        <a href="#" class="text-decoration-none" (click)="viewProjectDetails(project._id)">{{ project.project_name }}</a>
+      <h5 class="card-title project-title"  (click)="viewProjectDetails(project._id)">
+        {{ project.project_name }}
       </h5>
       <p class="card-text"><strong>Organization:</strong> {{ project.organization }}</p>
       <p class="card-text"><strong>Position:</strong> {{ project.position }}</p>
@@ -18,11 +18,11 @@
       </div>
       <p class="card-text"><strong>About:</strong></p>
       <ul>
-        <li *ngFor="let about of project.about_project.split('\n')">{{ about }}</li>
+        <li *ngFor="let about of project.about_project?.split('\n')">{{ about }}</li>
       </ul>
       <p class="card-text"><strong>Responsibilities:</strong></p>
       <ul>
-        <li *ngFor="let responsibility of project.responsibilities.split('\n')">{{ responsibility }}</li>
+        <li *ngFor="let responsibility of project.responsibilities?.split('\n')">{{ responsibility }}</li>
       </ul>
     </div>
   </div>

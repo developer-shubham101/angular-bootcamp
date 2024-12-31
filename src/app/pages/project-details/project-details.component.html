@@ -24,12 +24,12 @@
       <p class="card-text"><strong>About:</strong></p>
       <!-- <p class="card-text">{{ project.about_project }}</p> -->
       <ul>
-        <li *ngFor="let about of project.about_project.split('\n')">{{ about }}</li>
+        <li *ngFor="let about of project.about_project?.split('\n')">{{ about }}</li>
       </ul>
 
       <p><strong>Responsibilities:</strong></p>
       <ul>
-        <li *ngFor="let responsibility of project.responsibilities.split('\n')">{{ responsibility }}</li>
+        <li *ngFor="let responsibility of project.responsibilities?.split('\n')">{{ responsibility }}</li>
       </ul>
 
       <button class="btn btn-primary" (click)="enableEditMode()">Edit</button>

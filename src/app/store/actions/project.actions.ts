@@ -1,6 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 import { Project } from '../models/company.model';
 
+// Actions for loading projects
+export const loadProjects = createAction('[Project API] Load Projects');
+export const loadProjectsSuccess = createAction(
+  '[Project API] Load Projects Success',
+  props<{ projects: Project[] }>()
+);
+export const loadProjectsFailure = createAction(
+  '[Project API] Load Projects Failure',
+  props<{ error: any }>()
+);
+
 // Actions for loading a project by ID
 export const loadProject = createAction(
   '[Project API] Load Project',

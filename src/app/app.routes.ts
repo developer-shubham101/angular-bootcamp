@@ -15,6 +15,7 @@ import { NGRxExampleComponent } from './ngrx-example/ngrx-example.component';
 import { CompanyListComponent } from './company-listing/company-list/company-list.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { ProjectDetailsComponent } from './pages/project-details/project-details.component';
+import { ProjectListingComponent } from './pages/project-listing/project-listing.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Default route
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'ngrx-examples', component: NGRxExampleComponent },
   { path: 'companies', component: CompanyListComponent },
   { path: 'companies/:id', component: CompanyDetailsComponent },
-  // { path: 'project', component: CompanyDetailsComponent },
+  { path: 'projects', component: ProjectListingComponent },
   { path: 'project/:id', component: ProjectDetailsComponent },
 ];
 

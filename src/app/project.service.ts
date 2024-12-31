@@ -10,7 +10,11 @@ import { Project } from './store/models/company.model';
 export class ProjectService {
   private apiUrl = 'http://localhost:3000/api/user-experiences'; // Replace with your API URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
+
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.apiUrl);
+  }
 
   getProjectById(id: string): Observable<Project> {
     return this.http.get<Project>(`${this.apiUrl}/${id}`);
