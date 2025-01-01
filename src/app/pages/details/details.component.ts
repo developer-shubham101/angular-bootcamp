@@ -1,4 +1,4 @@
-import { Coffee } from './../entities/Coffee';
+import { Coffee } from '../../entities/Coffee';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

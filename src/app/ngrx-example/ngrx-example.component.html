@@ -1,7 +1,0 @@
-<div class="container">
-  <h1>NgRx Example</h1> <input #itemInput type="text" placeholder="Enter item"> <button
-    (click)="addItem(itemInput.value)">Add Item</button>
-  <ul>
-    <li *ngFor="let item of items$ | async"> {{ item }} <button (click)="removeItem(item)">Remove</button> </li>
-  </ul>
-</div>

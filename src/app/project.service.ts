@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Project } from './store/models/company.model';
+import { NewProject, Project } from './store/models/company.model';
  
 
 @Injectable({
@@ -22,5 +22,9 @@ export class ProjectService {
 
   updateProject(project: Project): Observable<Project> {
     return this.http.put<Project>(`${this.apiUrl}/${project._id}`, project);
+  }
+
+  createProject(project: NewProject): Observable<Project> {
+    return this.http.post<Project>(this.apiUrl, project);
   }
 }

@@ -1,11 +1,8 @@
 <div class="container">
 
-  <!-- <app-project-item [project]="project"> </app-project-item> -->
-
-
   <div *ngIf="project">
     <h2>Project Details</h2>
-    <div *ngIf="!editMode">
+    <!-- <div *ngIf="formMode == 'view'">
       <p><strong>Project Name:</strong> {{ project.project_name }}</p>
       <p><strong>Organization:</strong> {{ project.organization }}</p>
       <p><strong>Position:</strong> {{ project.position }}</p>
@@ -13,16 +10,12 @@
       <p><strong>To Date:</strong> {{ project.to_date | date }}</p>
       <p><strong>Platform:</strong> {{ project.platform }}</p>
       <p><strong>Technologies:</strong></p>
-      <!-- <ul>
-        <li *ngFor="let tech of project.technology">{{ tech }}</li>
-      </ul> -->
       <div class="d-inline-flex">
         <div *ngFor="let tech of project.technology" class="badge rounded-pill bg-primary me-2">
           {{ tech }}
         </div>
       </div>
       <p class="card-text"><strong>About:</strong></p>
-      <!-- <p class="card-text">{{ project.about_project }}</p> -->
       <ul>
         <li *ngFor="let about of project.about_project?.split('\n')">{{ about }}</li>
       </ul>
@@ -33,9 +26,12 @@
       </ul>
 
       <button class="btn btn-primary" (click)="enableEditMode()">Edit</button>
-    </div>
+    </div> -->
+<div *ngIf="formMode == 'view'">
+  <app-project-item [project]="project"> </app-project-item>
 
-    <div *ngIf="editMode">
+</div>
+    <div *ngIf="formMode != 'view'">
       <form (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="project_name">Project Name</label>
@@ -65,7 +61,7 @@
         </div>
         <div class="form-group">
           <label for="technology">Technology</label>
-          <input type="text" class="form-control" id="technology" [(ngModel)]="project.technology" name="technology">
+          <tag-input [(ngModel)]="tagItems" name="technology"></tag-input> <!-- Tag input for technology -->
         </div>
         <div class="form-group">
           <label for="about_project">About Project</label>
@@ -77,11 +73,15 @@
           <textarea class="form-control" id="responsibilities" [(ngModel)]="project.responsibilities"
             name="responsibilities"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-secondary" (click)="disableEditMode()">Cancel</button>
+        <div *ngIf="formMode == 'edit'">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" (click)="disableEditMode()">Cancel</button>
+        </div>
+        <div *ngIf="formMode == 'new'">
+          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" (click)="disableEditMode()">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
-
-
 </div>

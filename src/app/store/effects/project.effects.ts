@@ -1,4 +1,4 @@
-import { loadProjects, loadProjectsFailure, loadProjectsSuccess } from './../actions/project.actions';
+import { createProject, createProjectFailure, createProjectSuccess, loadProjects, loadProjectsFailure, loadProjectsSuccess } from './../actions/project.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
  
@@ -56,4 +56,17 @@ export class ProjectEffects {
       )
     )
   );
+
+  createProject$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createProject),
+      switchMap((action) =>
+        this.projectService.createProject(action.project).pipe(
+          map((project) => createProjectSuccess({ project })),
+          catchError((error) => of(createProjectFailure({ error })))
+        )
+      )
+    )
+  );
+
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { loadCompany, updateCompany } from '../store/actions/company.actions';
-import { AppState } from '../store/app.state';
-import { selectSelectedCompany } from '../store/selectors/company.selectors';
-import { Company } from '../store/models/company.model';
+import { loadCompany, updateCompany } from '../../store/actions/company.actions';
+import { AppState } from '../../store/app.state';
+import { selectSelectedCompany } from '../../store/selectors/company.selectors';
+import { Company } from '../../store/models/company.model';
 import { Observable } from 'rxjs';
 import moment from 'moment';
 
