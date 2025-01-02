@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component'; 
+import { ContactComponent } from './pages/contact/contact.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { CoffeeItemComponent } from './home/coffee-item/coffee-item.component';
 import { DirectivesExamplesComponent } from './pages/directives-examples/directives-examples.component';
@@ -15,16 +15,22 @@ import { CompanyListComponent } from './pages/company-list/company-list.componen
 import { CompanyDetailsComponent } from './pages/company-details/company-details.component';
 import { ProjectDetailsComponent } from './pages/project-details/project-details.component';
 import { ProjectListingComponent } from './pages/project-listing/project-listing.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { authGuardFn } from '@auth0/auth0-angular';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }, // Default route
+  { path: '', component: AuthComponent }, // Default route
   { path: 'coffee-details', component: CoffeeItemComponent },
   { path: 'coffee/:id', component: DetailsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'portfolio', component: ProjectListingComponent },
   { path: 'directives-examples', component: DirectivesExamplesComponent },
-  { path: 'companies', component: CompanyListComponent },
+  {
+    path: 'companies',
+    component: CompanyListComponent,
+    canActivate: [authGuardFn],
+  },
   { path: 'companies/:id', component: CompanyDetailsComponent },
   { path: 'projects', component: ProjectListingComponent },
   { path: 'project', component: ProjectDetailsComponent },

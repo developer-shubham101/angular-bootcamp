@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
@@ -27,9 +27,14 @@ import { projectReducer } from './store/reducers/project.reducer';
 import { ProjectEffects } from './store/effects/project.effects';
 import { ProjectListingComponent } from './pages/project-listing/project-listing.component';
 import { TagInputModule } from 'ngx-chips'; // Import NgxChipsModule
+import { AuthModule, provideAuth0 } from '@auth0/auth0-angular';
+import { AuthComponent } from './pages/auth/auth.component'; 
+import { AuthInterceptor } from './interceptors/auth.service';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
+    AuthComponent,
     AppComponent,
     HomeComponent,
     AboutComponent,
@@ -58,7 +63,17 @@ import { TagInputModule } from 'ngx-chips'; // Import NgxChipsModule
     EffectsModule.forRoot([ItemEffects, CompanyEffects, ProjectEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
   ],
-  providers: [],
+  providers: [
+    provideAuth0({
+      domain: environment.domain,
+      clientId: environment.clientId,
+      authorizationParams: {
+        audience: environment.audience,
+        redirect_uri: window.location.origin,
+      },
+    }),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
