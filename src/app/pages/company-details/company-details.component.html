@@ -1,6 +1,6 @@
-<div class="container">
-  <div *ngIf="company">
-    <h2>Company Details</h2>
+<div class="container company">
+   
+  <div class="company-details" *ngIf="company">
     <div *ngIf="!editMode">
       <p><strong>Organization:</strong> {{ company.organization }}</p>
       <p><strong>Position:</strong> {{ company.position }}</p>
@@ -8,20 +8,18 @@
       <p><strong>To Date:</strong> {{ company.to_date | date }}</p>
       <p><strong>Role:</strong> {{ company.role }}</p>
       <p><strong>Responsibilities:</strong></p>
-      <ul>
+      <ul class="company-info-ul">
         <li *ngFor="let responsibility of company.responsibilities.split('\n')">{{ responsibility }}</li>
       </ul>
  
       <div *ngFor="let project of company.projects">
         <app-project-item [project]="project"> </app-project-item>
       </div>
-      
-
-      <button class="btn btn-primary" (click)="enableEditMode()">Edit</button>
+      <button class="btn btn-primary company-button" (click)="enableEditMode()">Edit</button>
     </div>
-
+   
     <div *ngIf="editMode">
-      <form (ngSubmit)="onSubmit()">
+      <form class="company-form-group" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="organization">Organization</label>
           <input type="text" class="form-control" id="organization" [(ngModel)]="company.organization"
@@ -53,4 +51,5 @@
       </form>
     </div>
   </div>
+  
 </div>

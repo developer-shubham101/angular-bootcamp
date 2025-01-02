@@ -1,0 +1,39 @@
+.company-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.company .company-p {
+  line-height: 1.6;
+}
+
+.company-info-ul {
+  padding-left: 20px;
+}
+
+.company-li {
+  margin-bottom: 5px;
+}
+
+.company-form-group {
+  margin-bottom: 15px;
+}
+
+.company-label {
+  font-weight: bold;
+}
+
+.company-input, .company-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.company-button {
+  margin-right: 10px;
+}

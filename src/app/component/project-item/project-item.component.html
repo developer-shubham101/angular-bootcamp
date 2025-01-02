@@ -5,7 +5,7 @@
       <h5 class="card-title project-title"  (click)="viewProjectDetails(project._id)">
         {{ project.project_name }}
       </h5>
-      <p class="card-text"><strong>Organization:</strong> {{ project.organization }}</p>
+      <p class="card-text"><strong>Organization:</strong> {{ project.organization?.organization }}</p>
       <p class="card-text"><strong>Position:</strong> {{ project.position }}</p>
       <p class="card-text"><strong>From Date:</strong> {{ project.from_date | date }}</p>
       <p class="card-text"><strong>To Date:</strong> {{ project.to_date | date }}</p>

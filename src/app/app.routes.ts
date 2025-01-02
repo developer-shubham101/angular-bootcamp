@@ -20,21 +20,53 @@ import { authGuardFn } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   { path: '', component: AuthComponent }, // Default route
-  { path: 'coffee-details', component: CoffeeItemComponent },
-  { path: 'coffee/:id', component: DetailsComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'portfolio', component: ProjectListingComponent },
-  { path: 'directives-examples', component: DirectivesExamplesComponent },
+  {
+    path: 'coffee-details',
+    component: CoffeeItemComponent,
+    canActivate: [authGuardFn],
+  },
+  {
+    path: 'coffee/:id',
+    component: DetailsComponent,
+    canActivate: [authGuardFn],
+  },
+  { path: 'about', component: AboutComponent, canActivate: [authGuardFn] },
+  { path: 'contact', component: ContactComponent, canActivate: [authGuardFn] },
+  {
+    path: 'portfolio',
+    component: ProjectListingComponent,
+    canActivate: [authGuardFn],
+  },
+  {
+    path: 'directives-examples',
+    component: DirectivesExamplesComponent,
+    canActivate: [authGuardFn],
+  },
   {
     path: 'companies',
     component: CompanyListComponent,
     canActivate: [authGuardFn],
   },
-  { path: 'companies/:id', component: CompanyDetailsComponent },
-  { path: 'projects', component: ProjectListingComponent },
-  { path: 'project', component: ProjectDetailsComponent },
-  { path: 'project/:id', component: ProjectDetailsComponent },
+  {
+    path: 'companies/:id',
+    component: CompanyDetailsComponent,
+    canActivate: [authGuardFn],
+  },
+  {
+    path: 'projects',
+    component: ProjectListingComponent,
+    canActivate: [authGuardFn],
+  },
+  {
+    path: 'project',
+    component: ProjectDetailsComponent,
+    canActivate: [authGuardFn],
+  },
+  {
+    path: 'project/:id',
+    component: ProjectDetailsComponent,
+    canActivate: [authGuardFn],
+  },
 ];
 
 @NgModule({

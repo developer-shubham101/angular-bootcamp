@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { NewProject, Project } from '../models/company.model';
+import { NewProject, Project, UpdateProject } from '../models/company.model';
 
 // Actions for loading projects
 export const loadProjects = createAction('[Project API] Load Projects');
@@ -29,7 +29,7 @@ export const loadProjectFailure = createAction(
 // Actions for updating a project
 export const updateProject = createAction(
   '[Project API] Update Project',
-  props<{ project: Project }>()
+  props<{ project: UpdateProject }>()
 );
 export const updateProjectSuccess = createAction(
   '[Project API] Update Project Success',

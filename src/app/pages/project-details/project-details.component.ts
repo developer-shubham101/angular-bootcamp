@@ -3,7 +3,12 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { NewProject, Project } from '../../store/models/company.model';
+import {
+  Company,
+  NewProject,
+  Project,
+  UpdateProject,
+} from '../../store/models/company.model';
 import { AppState } from '../../store/app.state';
 import { selectProject } from '../../store/selectors/project.selectors';
 import {
@@ -13,6 +18,8 @@ import {
 } from '../../store/actions/project.actions';
 import moment from 'moment';
 import { FormMode } from '../../utilites/enums';
+import { selectAllCompanies } from '../../store/selectors/company.selectors';
+import { loadCompanies } from '../../store/actions/company.actions';
 
 @Component({
   selector: 'app-project-details',
@@ -22,6 +29,11 @@ import { FormMode } from '../../utilites/enums';
 export class ProjectDetailsComponent implements OnInit {
   project$!: Observable<Project | null>;
   project!: Project;
+
+  organizations: Company[] = [];
+  companies$!: Observable<Company[]>;
+  projectOrganization: string = '';
+
   formMode: FormMode = FormMode.View;
   tagItems: {
     display: string;
@@ -35,10 +47,18 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+
+    this.companies$ = this.store.select(selectAllCompanies);
+    this.companies$.subscribe((companies) => {
+      this.organizations = companies;
+    });
+    this.store.dispatch(loadCompanies());
+
     if (id) {
       this.project$ = this.store.select(selectProject);
       this.project$.subscribe((project) => {
         this.project = { ...project! };
+        this.projectOrganization = project?.organization?._id ?? '';
         this.formatDates();
       });
       this.store.dispatch(loadProject({ id }));
@@ -46,7 +66,17 @@ export class ProjectDetailsComponent implements OnInit {
       this.formMode = FormMode.New;
       this.project = {
         _id: '',
-        organization: '',
+        organization: {
+          _id: '',
+          organization: '',
+          position: '',
+          from_date: '',
+          to_date: '',
+          role: '',
+          responsibilities: '',
+          projects: [],
+          files: [],
+        },
         position: '',
         project_name: '',
         from_date: '',
@@ -69,22 +99,34 @@ export class ProjectDetailsComponent implements OnInit {
   }
   onSubmit(): void {
     if (this.formMode === FormMode.New) {
-      let newTmp: NewProject = {
-        organization: this.project.organization,
+      let tmpProject: NewProject = {
+        organization: this.project.organization._id,
         position: this.project.position,
         project_name: this.project.project_name,
         from_date: this.project.from_date,
         to_date: this.project.to_date,
         platform: this.project.platform,
-        technology: this.tagItems.map((tech) => tech.value),
+        technology: this.tagItems?.map((tech) => tech.value),
         responsibilities: this.project.responsibilities,
         about_project: this.project.about_project,
       };
 
-      this.store.dispatch(createProject({ project: newTmp }));
+      this.store.dispatch(createProject({ project: tmpProject }));
       // this.router.navigate(['/projects']);
     } else {
-      this.store.dispatch(updateProject({ project: this.project }));
+      let tmpProject: UpdateProject = {
+        _id: this.project._id,
+        organization: this.projectOrganization,
+        position: this.project.position,
+        project_name: this.project.project_name,
+        from_date: this.project.from_date,
+        to_date: this.project.to_date,
+        platform: this.project.platform,
+        technology: this.tagItems?.map((tech) => tech.value),
+        responsibilities: this.project.responsibilities,
+        about_project: this.project.about_project,
+      };
+      this.store.dispatch(updateProject({ project: tmpProject }));
       this.disableEditMode();
     }
   }
@@ -94,7 +136,7 @@ export class ProjectDetailsComponent implements OnInit {
       return;
     }
 
-    this.tagItems = this.project.technology.map((tech) => ({
+    this.tagItems = this.project.technology?.map((tech) => ({
       display: tech,
       value: tech,
     }));

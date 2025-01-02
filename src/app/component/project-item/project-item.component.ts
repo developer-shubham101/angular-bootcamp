@@ -12,7 +12,17 @@ import { Router } from '@angular/router';
 export class ProjectItemComponent {
   @Input() project: Project = {
     _id: '',
-    organization: '',
+    organization: {
+      _id: '',
+      organization: '',
+      position: '',
+      from_date: '',
+      to_date: '',
+      role: '',
+      responsibilities: '',
+      projects: [],
+      files: [],
+    },
     position: '',
     project_name: '',
     from_date: '',
