@@ -3,7 +3,7 @@ export interface ProjectId {
 }
 export interface Project {
   _id: string;
-  organization: Company;
+  organization: Company | null | undefined;
   position: string;
   project_name: string;
   from_date: string;

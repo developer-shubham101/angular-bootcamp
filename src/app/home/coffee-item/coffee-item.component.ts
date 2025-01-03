@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Coffee } from '../../entities/Coffee';
+import { Coffee } from '../../store/models/Coffee';
 import { Router } from '@angular/router';
 
 @Component({

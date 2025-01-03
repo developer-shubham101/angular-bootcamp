@@ -100,15 +100,15 @@ export class ProjectDetailsComponent implements OnInit {
   onSubmit(): void {
     if (this.formMode === FormMode.New) {
       let tmpProject: NewProject = {
-        organization: this.project.organization._id,
+        organization: this.project.organization!._id,
         position: this.project.position,
         project_name: this.project.project_name,
         from_date: this.project.from_date,
         to_date: this.project.to_date,
         platform: this.project.platform,
         technology: this.tagItems?.map((tech) => tech.value),
-        responsibilities: this.project.responsibilities,
-        about_project: this.project.about_project,
+        responsibilities: this.project.responsibilities.trimEnd(),
+        about_project: this.project.about_project.trimEnd(),
       };
 
       this.store.dispatch(createProject({ project: tmpProject }));
@@ -123,8 +123,8 @@ export class ProjectDetailsComponent implements OnInit {
         to_date: this.project.to_date,
         platform: this.project.platform,
         technology: this.tagItems?.map((tech) => tech.value),
-        responsibilities: this.project.responsibilities,
-        about_project: this.project.about_project,
+        responsibilities: this.project.responsibilities.trimEnd(),
+        about_project: this.project.about_project.trimEnd(),
       };
       this.store.dispatch(updateProject({ project: tmpProject }));
       this.disableEditMode();

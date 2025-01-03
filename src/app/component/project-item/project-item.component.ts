@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Project } from '../../store/models/company.model';
- 
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.state';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-project-item',

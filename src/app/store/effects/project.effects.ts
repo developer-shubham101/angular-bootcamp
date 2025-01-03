@@ -12,7 +12,7 @@ import {
 } from '../actions/project.actions';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ProjectService } from '../../project.service';
+import { ProjectService } from '../../service/project.service';
 
 @Injectable()
 export class ProjectEffects {

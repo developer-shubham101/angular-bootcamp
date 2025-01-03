@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HomeService {
-  private apiUrl = 'https://api.sampleapis.com/coffee/hot'; // Replace with your actual API URL
+  private readonly apiUrl = 'https://api.sampleapis.com/coffee/hot'; // Replace with your actual API URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);

@@ -1,9 +1,8 @@
 <div class="col-md-12">
   <div class="card mb-12 shadow-sm">
     <div class="card-body">
- 
-      <h5 class="card-title project-title"  (click)="viewProjectDetails(project._id)">
-        {{ project.project_name }}
+      <h5 class="card-title project-title">
+        <a routerLink="/project/{{project._id}}" class="text-decoration-none">{{ project.project_name }}</a>
       </h5>
       <p class="card-text"><strong>Organization:</strong> {{ project.organization?.organization }}</p>
       <p class="card-text"><strong>Position:</strong> {{ project.position }}</p>
@@ -11,7 +10,7 @@
       <p class="card-text"><strong>To Date:</strong> {{ project.to_date | date }}</p>
       <p class="card-text"><strong>Platform:</strong> {{ project.platform }}</p>
       <p class="card-text"><strong>Technologies:</strong></p>
-      <div class="d-inline-flex">
+      <div>
         <div *ngFor="let tech of project.technology" class="badge rounded-pill bg-primary me-2">
           {{ tech }}
         </div>
