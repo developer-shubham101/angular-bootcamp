@@ -1,3 +1,4 @@
+import { Technology } from './../../store/models/technology.model';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,6 +21,13 @@ import moment from 'moment';
 import { FormMode } from '../../utilites/enums';
 import { selectAllCompanies } from '../../store/selectors/company.selectors';
 import { loadCompanies } from '../../store/actions/company.actions';
+import { NewTechnology } from '../../store/models/technology.model';
+import { selectAllTechnologies } from '../../store/selectors/technology.selectors';
+import {
+  createTechnology,
+  loadTechnologies,
+} from '../../store/actions/technology.action';
+import { TagModel } from 'ngx-chips/core/tag-model';
 
 @Component({
   selector: 'app-project-details',
@@ -34,11 +42,15 @@ export class ProjectDetailsComponent implements OnInit {
   companies$!: Observable<Company[]>;
   projectOrganization: string = '';
 
+  technologies: string[] = [];
+  technologies$!: Observable<Technology[]>;
+
   formMode: FormMode = FormMode.View;
   tagItems: {
     display: string;
     value: string;
   }[] = []; // Array for tag inputs
+
   constructor(
     private readonly store: Store<AppState>,
     private readonly route: ActivatedRoute,
@@ -52,6 +64,13 @@ export class ProjectDetailsComponent implements OnInit {
     this.companies$.subscribe((companies) => {
       this.organizations = companies;
     });
+
+    this.technologies$ = this.store.select(selectAllTechnologies);
+    this.technologies$.subscribe((technologies) => {
+      this.technologies = technologies.map((tech) => tech.name);
+    });
+    this.store.dispatch(loadTechnologies());
+
     this.store.dispatch(loadCompanies());
 
     if (id) {
@@ -147,6 +166,24 @@ export class ProjectDetailsComponent implements OnInit {
     }
     if (this.project.to_date) {
       this.project.to_date = moment(this.project.to_date).format('YYYY-MM-DD');
+    }
+  }
+
+  async onAddingTechnology(data: TagModel): Promise<void> {
+    const name = typeof data === 'string' ? data : data['value'];
+
+    try {
+      const existingTechnology = this.technologies.find(
+        (tech) => tech === name
+      );
+      if (!existingTechnology) {
+        let tmpNewTechnology: NewTechnology = {
+          name: name,
+        };
+        this.store.dispatch(createTechnology({ technology: tmpNewTechnology }));
+      }
+    } catch (error) {
+      console.error('Error adding technology', error);
     }
   }
 }

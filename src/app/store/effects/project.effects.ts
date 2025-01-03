@@ -17,8 +17,8 @@ import { ProjectService } from '../../service/project.service';
 @Injectable()
 export class ProjectEffects {
   constructor(
-    private actions$: Actions,
-    private projectService: ProjectService
+    private readonly actions$: Actions,
+    private readonly projectService: ProjectService
   ) {}
 
   loadProjects$ = createEffect(() =>

@@ -36,7 +36,12 @@
       </div>
       <div class="form-group">
         <label for="technology">Technology</label>
-        <tag-input [(ngModel)]="tagItems" name="technology"></tag-input> <!-- Tag input for technology -->
+        <!-- <tag-input [(ngModel)]="tagItems" name="technology"></tag-input> -->
+        <tag-input [(ngModel)]="project.technology" name="technology" [onlyFromAutocomplete]="false"
+          (onAdd)="onAddingTechnology($event)">
+          <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="technologies">
+          </tag-input-dropdown>
+        </tag-input>
       </div>
       <div class="form-group">
         <label for="about_project">About Project</label>

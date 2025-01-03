@@ -29,7 +29,9 @@ import { AuthModule, provideAuth0 } from '@auth0/auth0-angular';
 import { AuthComponent } from './pages/auth/auth.component';
 import { AuthInterceptor } from './interceptors/auth.service';
 import { environment } from '../environments/environment';
-
+import { technologyReducer } from './store/reducers/technology.reducer';
+import { TechnologyEffects } from './store/effects/technology.effects';
+import { provideAnimations } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -56,8 +58,9 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot({
       companies: companyReducer,
       project: projectReducer,
+      technology: technologyReducer,
     }),
-    EffectsModule.forRoot([CompanyEffects, ProjectEffects]),
+    EffectsModule.forRoot([CompanyEffects, ProjectEffects, TechnologyEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
   ],
   providers: [
@@ -70,6 +73,7 @@ import { environment } from '../environments/environment';
       },
     }),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideAnimations(),
   ],
   bootstrap: [AppComponent],
 })
