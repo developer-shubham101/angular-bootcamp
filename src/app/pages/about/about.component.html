@@ -1,1 +1,130 @@
-<p>about works!</p>
+<div *ngIf="user">
+  <h2>About Me - {{ user.name }}</h2>
+
+  <div *ngIf="!editMode">
+    <p><strong>Profile Type:</strong> {{ user.profileType }}</p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Contact:</strong></p>
+    <ul>
+      <li><strong>Phone:</strong> {{ user.contact.phone }}</li>
+      <li><strong>Email:</strong> {{ user.contact.email }}</li>
+      <li><strong>Location:</strong> {{ user.contact.location }}</li>
+      <li><strong>LinkedIn:</strong> {{ user.contact.linkedin }}</li>
+      <li><strong>GitHub:</strong> {{ user.contact.github }}</li>
+    </ul>
+    <p><strong>About Me:</strong> {{ user.aboutMe }}</p>
+    <p><strong>Key Skills:</strong></p>
+    <ul>
+      <li *ngFor="let skill of user.keySkills">
+        <strong>{{ skill.category }}:</strong> {{ skill.skills.join(', ') }}
+      </li>
+    </ul>
+    <p><strong>Education:</strong></p>
+    <ul class="list-group">
+      <li *ngFor="let education of user.education" class="list-group-item">
+        <h5 class="mb-1">{{ education.degreeName }}</h5>
+        <p class="mb-1"><strong>College:</strong> {{ education.instituteName }}</p>
+        <p class="mb-1"><strong>Duration:</strong> {{ education.duration.startMonth }} {{ education.duration.startYear
+          }} - {{ education.duration.endMonth }} {{ education.duration.endYear }}</p>
+        <p class="mb-1"><strong>Specialization:</strong> {{ education.specialization }}</p>
+        <p class="mb-1"><strong>University:</strong> {{ education.universityName }}</p>
+        <p class="mb-1"><strong>Location:</strong> {{ education.location }}</p>
+        <p class="mb-1"><strong>Course Type:</strong> {{ education.courseType }}</p>
+        <p class="mb-1"><strong>Percentage:</strong> {{ education.percentage }}</p>
+      </li>
+    </ul>
+    <button class="btn btn-primary" (click)="enableEditMode()">Edit</button>
+  </div>
+
+  <div *ngIf="editMode">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="profileType">Profile Type</label>
+        <input type="text" class="form-control" id="profileType" [(ngModel)]="user.profileType" name="profileType">
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control" id="phone" [(ngModel)]="user.contact.phone" name="phone">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="user.contact.email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" [(ngModel)]="user.contact.location" name="location">
+      </div>
+      <div class="form-group">
+        <label for="linkedin">LinkedIn</label>
+        <input type="text" class="form-control" id="linkedin" [(ngModel)]="user.contact.linkedin" name="linkedin">
+      </div>
+      <div class="form-group">
+        <label for="github">GitHub</label>
+        <input type="text" class="form-control" id="github" [(ngModel)]="user.contact.github" name="github">
+      </div>
+      <div class="form-group">
+        <label for="aboutMe">About Me</label>
+        <textarea class="form-control" id="aboutMe" [(ngModel)]="user.aboutMe" name="aboutMe"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="keySkills">Key Skills</label>
+        <div *ngFor="let skill of user.keySkills">
+          <strong>{{ skill.category }}:</strong>
+          <input type="text" class="form-control" [(ngModel)]="skill.skills" name="skills">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="education">Education</label>
+        <div *ngFor="let education of user.education" class="education-entry">
+          <div class="form-group">
+            <label for="degreeName">Degree Name</label>
+            <input type="text" class="form-control" [(ngModel)]="education.degreeName" name="degreeName">
+          </div>
+          <div class="form-group">
+            <label for="collegeName">College Name</label>
+            <input type="text" class="form-control" [(ngModel)]="education.instituteName" name="collegeName">
+          </div>
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <div class="d-flex">
+              <input type="text" class="form-control" [(ngModel)]="education.duration.startMonth" name="startMonth"
+                placeholder="Start Month">
+              <input type="text" class="form-control" [(ngModel)]="education.duration.startYear" name="startYear"
+                placeholder="Start Year">
+              <input type="text" class="form-control" [(ngModel)]="education.duration.endMonth" name="endMonth"
+                placeholder="End Month">
+              <input type="text" class="form-control" [(ngModel)]="education.duration.endYear" name="endYear"
+                placeholder="End Year">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="specialization">Specialization</label>
+            <input type="text" class="form-control" [(ngModel)]="education.specialization" name="specialization">
+          </div>
+          <div class="form-group">
+            <label for="universityName">University Name</label>
+            <input type="text" class="form-control" [(ngModel)]="education.universityName" name="universityName">
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" [(ngModel)]="education.location" name="location">
+          </div>
+          <div class="form-group">
+            <label for="courseType">Course Type</label>
+            <input type="text" class="form-control" [(ngModel)]="education.courseType" name="courseType">
+          </div>
+          <div class="form-group">
+            <label for="percentage">Percentage</label>
+            <input type="text" class="form-control" [(ngModel)]="education.percentage" name="percentage">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="disableEditMode()">Cancel</button>
+    </form>
+  </div>
+</div>

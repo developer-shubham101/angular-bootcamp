@@ -32,6 +32,8 @@ import { environment } from '../environments/environment';
 import { technologyReducer } from './store/reducers/technology.reducer';
 import { TechnologyEffects } from './store/effects/technology.effects';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { userReducer } from './store/reducers/user.reducer';
+import { UserEffects } from './store/effects/user.effects';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -59,8 +61,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
       companies: companyReducer,
       project: projectReducer,
       technology: technologyReducer,
+      user: userReducer
     }),
-    EffectsModule.forRoot([CompanyEffects, ProjectEffects, TechnologyEffects]),
+    EffectsModule.forRoot([CompanyEffects, ProjectEffects, TechnologyEffects, UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
   ],
   providers: [
